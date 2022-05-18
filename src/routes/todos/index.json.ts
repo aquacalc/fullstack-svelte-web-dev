@@ -1,44 +1,39 @@
 import type { RequestHandler } from "@sveltejs/kit";
 
-// TODO: Persist in DB
-let todos: Todo[] = [];
+import {api} from './_api';
 
-// export const get: RequestHandler = () => {
-//     return {
-//         status: 200,
-//         body: 'Još jedanput: Evo me!'
-//     }
-// }
-
-export const get: RequestHandler = async ({ request }) => {
-  return {
-    status: 200,
-    body: todos
-  }
+export const get: RequestHandler = async (event) => {
+    return api(event);
 }
 
-export const post: RequestHandler = async ({request}) => {
-    const formData = await request.formData()
+// export const post: RequestHandler<{}, FormData> = async (event) => {
+//     return api(event, {
+//       uid: `${Date.now()}`, // TODO: Replace with the UID from the datbase
+//       created_at: new Date(),
+//       text: request.body.get("text"),
+//       done: false
+//     });
+//   }
+
+export const post: RequestHandler = async (event) => {
+    const formData = await event.request.formData()
 
     console.log(`formData.get() -> ${formData.get('text')}`)
 
-    todos.push({
-        created_at: new Date(),
-        text: formData.get('text') as string,
-        done: false
-    })
+    return api(event);
+
+    // todos.push({
+    //     created_at: new Date(),
+    //     text: formData.get('text') as string,
+    //     done: false
+    // })
 
         // see: ~3:04:00 https://www.youtube.com/watch?v=OUzaUJ3gEug
         // (To return to homepage)
-    return {
-        status: 303,
-        headers: {
-            location: '/'
-        }
-    }
-
     // return {
-    //     status: 200,
-    //     body: formData.get('text') as string
+    //     status: 303,
+    //     headers: {
+    //         location: '/'
+    //     }
     // }
 }

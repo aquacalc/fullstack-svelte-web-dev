@@ -1,11 +1,19 @@
-<div class="todo done">
+<script lang='ts'>
+  export let todo: Todo
+
+</script>
+
+<div class="todo">
+  <!-- <h2>{todo.text}</h2>
+  <h2>'{todo.text}'</h2>
+  <h2>{todo.created_at}</h2> -->
     <form action="" method="">
-        <input type="hidden" name="done" value=''>
+        <input type="hidden" name="done">
         <button aria-label="Done or not done" class='toggle'></button>
     </form>
 
     <form action="" method="" class='text'>
-        <input type="text" name="done" value=''>
+        <input type="text" name="text" value='{todo.text}'>
         <button aria-label="Save Todo" class='save'></button>
     </form>
 

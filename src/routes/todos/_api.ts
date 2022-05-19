@@ -4,9 +4,11 @@ import type { Request } from "@sveltejs/kit";
 // TODO: Persist in DB
 let todos: Todo[] = [];
 
-export const api = (event: Request, todo?: Todo) => {
+export const api = (event: Request, todo?: Record<string, unknown>) => {
     let body = {};
     let status = 500;
+
+    console.log(`** PARAMS: ${event.url.params}`)
 
     console.log(`** Method: ${event.request.method}`)
     console.log(`** Method: ${event.request}`)
@@ -28,7 +30,10 @@ export const api = (event: Request, todo?: Todo) => {
             break;
 
         case "DELETE":
-            todos = todos.filter(todo => todo.uid !== event.request.params.uid)
+            // console.log(`todos: `, todos)
+            // console.log(event.params)
+            // console.log(' ----- ')
+            todos = todos.filter(todo => todo.uid !== event.params.uid)
             status = 200;
             break;
 

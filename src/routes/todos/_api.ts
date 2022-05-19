@@ -11,6 +11,10 @@ export const api = (event: Request, todo?: Todo) => {
     console.log(`** Method: ${event.request.method}`)
     console.log(`** Method: ${event.request}`)
     console.log(`Method: ${event.request.method.toLocaleUpperCase()}`)
+
+    // see: https://stackoverflow.com/questions/71379031/how-do-get-query-string-parameter-in-sveltekit
+    const myMethod = event.url.searchParams.get('_method');
+    console.log(`myMethod = ${myMethod}`)
     
     switch (event.request.method.toLocaleUpperCase()) {
 
@@ -21,6 +25,11 @@ export const api = (event: Request, todo?: Todo) => {
 
         case "POST":
             todos.push(todo as Todo);
+            break;
+
+        case "DELETE":
+            todos = todos.filter(todo => todo.uid !== event.request.params.uid)
+            status = 200;
             break;
 
         default:

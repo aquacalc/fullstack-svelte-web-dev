@@ -4,9 +4,11 @@ import type { Handle } from '@sveltejs/kit';
 // see: https://github.com/sveltejs/kit/pull/3384
 export const handle: Handle = async ({ event, resolve }) => {
     console.log(`In hook, event.request.url.includes('_method') = `, event.request.url.includes('_method'))
+    console.log(`**In hook, event.url.searchParams.get('_method') = `, event.url.searchParams.get('_method'))
     
     // see: https://stackoverflow.com/questions/71379031/how-do-get-query-string-parameter-in-sveltekit
     console.log(event.url.searchParams.get('_method'))
+
     // const isDelete = event.url.pathname.includes('delete');
     // console.log(`Does path include -delete-? ${isDelete}`)
     // if(event.request.url.includes('_method')) {

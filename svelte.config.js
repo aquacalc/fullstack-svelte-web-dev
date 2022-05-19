@@ -19,7 +19,6 @@ const config = {
 			}
 		},
 
-// see: https://kit.svelte.dev/docs/routing#endpoints-http-method-overrides
 		methodOverride: {
 			allowed: ['PUT', 'PATCH', 'DELETE']
 		  }

@@ -1,13 +1,15 @@
 import type { RequestHandler } from "@sveltejs/kit";
+import type { Request } from "@sveltejs/kit";
 
 // TODO: Persist in DB
 let todos: Todo[] = [];
 
-export const api: RequestHandler = async (event) => {
+export const api = (event: Request, todo?: Todo) => {
     let body = {};
     let status = 500;
 
     console.log(`** Method: ${event.request.method}`)
+    console.log(`** Method: ${event.request}`)
     console.log(`Method: ${event.request.method.toLocaleUpperCase()}`)
     
     switch (event.request.method.toLocaleUpperCase()) {
@@ -18,26 +20,20 @@ export const api: RequestHandler = async (event) => {
             break;
 
         case "POST":
-            const newTodo: Todo = {
-                created_at: new Date(),
-                text: (await event.request.formData()).get('text') as string,
-                done: false
-            };
-
-            todos.push(newTodo as Todo);
-            body = newTodo as Todo;
-
-            console.log(`todos: `, todos);
-
-            return {
-                status: 303,
-                headers: {
-                    location: '/'
-                }
-            }
+            todos.push(todo as Todo);
+            break;
 
         default:
             break;
+    }
+
+    if (event.request.method.toUpperCase() !== "GET") {
+        return {
+            status: 303,
+            headers: {
+                location: '/'
+            }
+        }
     }
 
     return {

@@ -11,6 +11,6 @@ export const patch: RequestHandler<{}, FormData> = async (event) => {
 
   return api(event, {
     text: body.get("text"),
-    // done: request.body.has("done") ? !!request.body.get("done") : undefined
+    done: body.has("done") ? !!body.get("done") : undefined
   });
 }

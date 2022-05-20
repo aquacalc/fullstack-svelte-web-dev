@@ -8,16 +8,15 @@ export const api = (event: Request, data?: Record<string, unknown>) => {
     let body = {};
     let status = 500;
 
-    console.log(`** PARAMS: ${event.params}`)
-    console.log(`** data: `, data)
+    // console.log(`** PARAMS: ${event.params}`)
+    // console.log(`** data: `, data)
 
-    console.log(`** Method: ${event.request.method}`)
-    // console.log(`** Method: ${event.request}`)
-    console.log(`Method: ${event.request.method.toLocaleUpperCase()}`)
+    // console.log(`** Method: ${event.request.method}`)
+    // console.log(`Method: ${event.request.method.toLocaleUpperCase()}`)
 
     // see: https://stackoverflow.com/questions/71379031/how-do-get-query-string-parameter-in-sveltekit
-    const myMethod = event.url.searchParams.get('_method');
-    console.log(`myMethod = ${myMethod}`)
+    // const myMethod = event.url.searchParams.get('_method');
+    // console.log(`myMethod = ${myMethod}`)
     
     switch (event.request.method.toLocaleUpperCase()) {
 
@@ -28,15 +27,11 @@ export const api = (event: Request, data?: Record<string, unknown>) => {
 
         case "POST":
             todos.push(data as Todo);
-            // body = data;
+            body = data as Todo;
             status = 201;
             break;
 
         case "DELETE":
-            // console.log('DELETE')
-            // console.log(`todos: `, todos)
-            // console.log(event.params)
-            // console.log(' ----- ')
             todos = todos.filter(todo => todo.uid !== event.params.uid)
             status = 200;
             break;
@@ -44,8 +39,8 @@ export const api = (event: Request, data?: Record<string, unknown>) => {
         case "PATCH":
             todos = todos.map(todo => {
                 if (todo.uid === event.params.uid) {
-                    console.log(`${todo.uid} === ${event.params.uid} & ${data.text}`)
-                    todo.text = data.text as string
+                    if (data.text) todo.text = data.text as string;
+                    else todo.done = data.done as boolean;
                 }
                 return todo;
             })

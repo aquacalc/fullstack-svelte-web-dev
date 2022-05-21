@@ -9,6 +9,9 @@ export const handle: Handle = async ({ event, resolve }) => {
     // see: https://stackoverflow.com/questions/71379031/how-do-get-query-string-parameter-in-sveltekit
     // console.log(event.url.searchParams.get('_method'))
 
+    // [NB] adding 'allowed' HTTP verbs to svelte.config.js, event.request.method gives correct method.
+    // console.log(`event: `, event.request.method)
+
     // const isDelete = event.url.pathname.includes('delete');
     // console.log(`Does path include -delete-? ${isDelete}`)
     // if(event.request.url.includes('_method')) {

@@ -28,11 +28,11 @@
 
     const processNewTodoResult = async (res: Response, form: HTMLFormElement) => {
 
-      console.log(' ')
-      console.log('====================')
-      console.log(`res: `, res)
-      console.log(`form: `, form)
-      console.log(`form.action: `, form.action)
+      // console.log(' ')
+      // console.log('====================')
+      // console.log(`res: `, res)
+      // console.log(`form: `, form)
+      // console.log(`form.action: `, form.action)
       // console.log('res.text: ', await res.text())
       // console.log('typeof ...: ', typeof await res.json())
 
@@ -51,11 +51,11 @@
       //   done: false
       // };
 
-      console.log(`00000000000`)
-      console.log(`newTodo`, newTodo)
+      // console.log(`00000000000`)
+      // console.log(`newTodo`, newTodo)
 
-      console.log('====================')
-      console.log(' ')
+      // console.log('====================')
+      // console.log(' ')
 
       todos = [...todos, newTodo];
 

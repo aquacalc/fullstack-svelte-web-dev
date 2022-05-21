@@ -5,6 +5,10 @@
   export let processDeletedTodoResult: (res: Response) => void;
   export let processUpdatedTodoResult: (res: Response) => void;
 
+
+  // disabled="{todo.done}"
+  //         style="cursor: {todo.done ? 'not-allowed' : 'default' }"
+
 </script>
 
 <div class="todo" class:done={todo.done}>
@@ -22,8 +26,6 @@
           type="text" 
           name="text" 
           value='{todo.text}' 
-          disabled="{todo.done}"
-          style="cursor: {todo.done ? 'not-allowed' : 'default' }"
         >
         <button aria-label="Save Todo" class='save'></button>
     </form>

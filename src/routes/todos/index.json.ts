@@ -8,7 +8,8 @@ export const get = (event: RequestHandler) => {
 
 export const post: RequestHandler<{}, FormData> = async (event) => {
     const body = await event.request.formData();
-    // console.log(`*** event: `, body.get('text'))
+    // console.log(`*** body: `, body)
+    // console.log(`*** body.get('text'): `, body.get('text'))
     
     return api(event, {
       uid: `${Date.now()}`, // TODO: Replace with the UID from the datbase

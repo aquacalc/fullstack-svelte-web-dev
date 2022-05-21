@@ -12,22 +12,26 @@ export const enhance = (form: HTMLFormElement, {
   
       try {
         console.log(`FORM = `, form)
-        const body = new FormData(form);
-        console.log(`BODY = `, body)
+        // const body = new FormData(form);
+        // console.log(`BODY = `, body)
 
         const res = await fetch(form.action, {
           method: form.method,
           headers: {
             accept: "application/json"
           },
-          body
+          body: new FormData(form)
         });
 
         console.log(`res: `, res)
+        console.log(`res.body: `, res.body)
+        console.log(`res.status: `, res.status)
         console.log(`res.ok: `, res.ok)
   
         if (res.ok) {
-          result(res, form);
+          console.log(`result: `, result)
+          console.log(`res: `, res)
+          // result(res, form);
         } else {
           console.error("Fetch error: ", await res.text());
         }

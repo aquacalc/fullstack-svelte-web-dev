@@ -51,7 +51,8 @@ export const api = (event: Request, data?: Record<string, unknown>) => {
             break;
     }
 
-    if (event.request.method.toUpperCase() !== "GET") {
+    if (event.request.method.toUpperCase() !== "GET" &&
+        event.request.headers.accept !== "application/json") {
         return {
             status: 303,
             headers: {

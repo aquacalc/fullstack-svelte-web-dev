@@ -28,13 +28,34 @@
 
     const processNewTodoResult = async (res: Response, form: HTMLFormElement) => {
 
+      console.log(' ')
+      console.log('====================')
       console.log(`res: `, res)
       console.log(`form: `, form)
+      console.log(`form.action: `, form.action)
+      // console.log('res.text: ', await res.text())
+      // console.log('typeof ...: ', typeof await res.json())
 
-      const body = new FormData(form);
-      console.log(`body = `, body)
+      // const body = new FormData(form);
+      // console.log(`body = `, body)
 
-      const newTodo = await res.json();
+      // "That unexpected token, <, is a strong clue that the response was HTML instead of JSON.
+      // The root cause is that the server returned HTML or some other non-JSON string. 
+      const newTodo = (await res.json());
+
+
+      // const newTodo = {
+      //   uid: `${Date.now()}`, // TODO: Replace with the UID from the datbase
+      //   created_at: new Date(),
+      //   text: 'This is text...',
+      //   done: false
+      // };
+
+      console.log(`00000000000`)
+      console.log(`newTodo`, newTodo)
+
+      console.log('====================')
+      console.log(' ')
 
       todos = [...todos, newTodo];
 
@@ -59,10 +80,18 @@
 <div class="todos">
     <h1>{title}</h1>
 
-    <form action="/todos.json" method="POST" class='new' use:enhance={{
-      result: processNewTodoResult
-    }}>
-        <input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
+    <form 
+      action="/todos.json" 
+      method="POST" 
+      class='new' 
+      use:enhance={{ result: processNewTodoResult }}
+    >
+        <input 
+          type="text" 
+          name="text" 
+          aria-label="Add a todo" 
+          placeholder="+ type to add a todo" 
+        />
     </form>
 
     {#each todos as todo}
